@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import FoodList from './FoodList';
+import FoodForm from './FoodForm';
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,6 +14,9 @@ function FoodApp() {
         {id: 3, food: 'spagetti', favourite: true},
     ];
     const [bestFood, setBestFood] =  useState(initialFood);
+    const addFood = newFoodText => {
+        setBestFood([...bestFood, {id: 4, food: newFoodText, favourite: true}]);
+    }
   return (
     <Paper
       style={{
@@ -32,6 +36,7 @@ function FoodApp() {
                 <Typography color='inherit'>Best food ever</Typography>
             </Toolbar>
         </AppBar>
+        <FoodForm addFood={addFood}/>
         <FoodList bestFood={bestFood} />
     </Paper>
   );
