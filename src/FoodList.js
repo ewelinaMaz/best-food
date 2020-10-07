@@ -2,18 +2,20 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from '@material-ui/core/ListItemText';
+import FoodChange from "./FoodChange";
 
-function FoodList(props) {
+function FoodList({ bestFood, removeFood}) {
   return (
     <Paper>
       <List>
-        {props.bestFood.map((best) => (
+        {bestFood.map((best) => (
             <>
-          <ListItem>
-              <ListItemText>{best.food}</ListItemText>
-          </ListItem>
+                  <FoodChange 
+                  removeFood={removeFood} 
+                  food={best.food} 
+                  id={best.id}
+                  key={best.id} 
+                  favourite={best.favourite}/>
           <Divider/>
           </>
         ))}

@@ -1,22 +1,27 @@
 import React, { useState } from "react";
-import FoodList from './FoodList';
-import FoodForm from './FoodForm';
+import FoodList from "./FoodList";
+import FoodForm from "./FoodForm";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
+import { v4 as uuidv4 } from 'uuid';
 
 function FoodApp() {
-    const initialFood = [
-        {id: 1, food: 'burgers', favourite: true},
-        {id: 2, food: 'pizza', favourite: true},
-        {id: 3, food: 'spagetti', favourite: true},
-    ];
-    const [bestFood, setBestFood] =  useState(initialFood);
-    const addFood = newFoodText => {
-        setBestFood([...bestFood, {id: 4, food: newFoodText, favourite: true}]);
-    }
+  const initialFood = [
+    { id: 1, food: "burgers", favourite: true },
+    { id: 2, food: "pizza", favourite: true },
+    { id: 3, food: "spagetti", favourite: true },
+  ];
+  const [bestFood, setBestFood] = useState(initialFood);
+  const addFood = (newFoodText) => {
+    setBestFood([...bestFood, { id: uuidv4(), food: newFoodText, favourite: true }]);
+  };
+  const removeFood = (foodId) => {
+    const updatedFood = bestFood.filter((food) => food.id !== foodId);
+    setBestFood(updatedFood);
+  };
   return (
     <Paper
       style={{
@@ -27,17 +32,17 @@ function FoodApp() {
       }}
       elevation={0}
     >
-        <AppBar
-        color='primary'
-        position='static'
-        style={{height: "64px"}}
-        >
-            <Toolbar>
-                <Typography color='inherit'>Best food ever</Typography>
-            </Toolbar>
-        </AppBar>
-        <FoodForm addFood={addFood}/>
-        <FoodList bestFood={bestFood} />
+      <AppBar color="primary" position="static" style={{ height: "64px" }}>
+        <Toolbar>
+          <Typography color="inherit">Best food ever</Typography>
+        </Toolbar>
+      </AppBar>
+      <Grid container justify="center" style={{ marginTop: "1rem" }}>
+        <Grid item xs={11} md={8} lg={4}>
+          <FoodForm addFood={addFood} />
+          <FoodList bestFood={bestFood} removeFood={removeFood}/>
+        </Grid>
+      </Grid>
     </Paper>
   );
 }
