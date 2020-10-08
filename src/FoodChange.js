@@ -8,17 +8,19 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 
-
-function FoodChange({ food, favourite, removeFood, id, toggleFavourite, editFood }) {
+function FoodChange({
+  food,
+  favourite,
+  removeFood,
+  id,
+  toggleFavourite,
+  editFood,
+}) {
   const [isEditing, toggle] = useToggle(false);
   return (
-    <ListItem>
+    <ListItem style={{height: "64px"}}>
       {isEditing ? (
-        <EditFood 
-        editFood={editFood} 
-        id={id} 
-        food={food} 
-        toggleEdit={toggle}/>
+        <EditFood editFood={editFood} id={id} food={food} toggleEdit={toggle} />
       ) : (
         <>
           <ListItemText>{food}</ListItemText>

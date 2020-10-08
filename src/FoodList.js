@@ -6,23 +6,23 @@ import FoodChange from "./FoodChange";
 
 function FoodList({ bestFood, removeFood, editFood, toggleFavourite}) {
   return (
+    bestFood.length ?
     <Paper>
       <List>
-        {bestFood.map((best) => (
+        {bestFood.map((best, i) => (
             <>
                   <FoodChange 
                   removeFood={removeFood} 
-                  food={best.food} 
-                  id={best.id}
-                  key={best.id} 
-                  favourite={best.favourite}
+                  {...best}
+                  key={best.id}
                   toggleFavourite={toggleFavourite}
                   editFood= {editFood}/>
-          <Divider/>
+                  {i < bestFood.length - 1 && <Divider/>}
+         
           </>
         ))}
       </List>
-    </Paper>
+    </Paper> : null
   );
 }
 export default FoodList;
