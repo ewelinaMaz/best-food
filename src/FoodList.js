@@ -4,7 +4,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import FoodChange from "./FoodChange";
 
-function FoodList({ bestFood, removeFood}) {
+function FoodList({ bestFood, removeFood, editFood, toggleFavourite}) {
   return (
     <Paper>
       <List>
@@ -15,7 +15,9 @@ function FoodList({ bestFood, removeFood}) {
                   food={best.food} 
                   id={best.id}
                   key={best.id} 
-                  favourite={best.favourite}/>
+                  favourite={best.favourite}
+                  toggleFavourite={toggleFavourite}
+                  editFood= {editFood}/>
           <Divider/>
           </>
         ))}

@@ -22,6 +22,20 @@ function FoodApp() {
     const updatedFood = bestFood.filter((food) => food.id !== foodId);
     setBestFood(updatedFood);
   };
+  const toggleFavourite = (foodId) => {
+    const updatedFood = bestFood.map(food => 
+        food.id === foodId ? {...food, favourite: !food.favourite } :
+        food
+  );
+  setBestFood(updatedFood)
+}
+const editFood = (foodId, newFood) => {
+    const updatedFood = bestFood.map(best => 
+        best.id === foodId ? {...best, food: newFood } :
+        best
+    );
+    setBestFood(updatedFood);
+}
   return (
     <Paper
       style={{
@@ -40,7 +54,11 @@ function FoodApp() {
       <Grid container justify="center" style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
           <FoodForm addFood={addFood} />
-          <FoodList bestFood={bestFood} removeFood={removeFood}/>
+          <FoodList 
+          bestFood={bestFood} 
+          removeFood={removeFood}
+          toggleFavourite={toggleFavourite}
+          editFood={editFood}/>
         </Grid>
       </Grid>
     </Paper>
